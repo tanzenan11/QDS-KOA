@@ -1,0 +1,184 @@
+IGD_m =[
+    0.2039    0.3104    0.3845    0.2010    0.4972
+    0.1390    0.2439    0.7273    0.3457    0.3367
+    0.1113    0.4519    0.8319    0.2273    0.3912
+    0.2086    0.2992    0.8306    0.2663    0.5345
+    0.2513    0.3656    0.8441    0.1492    0.6607
+    0.1663    0.3377    0.6819    0.4050    0.4890
+    0.1857    0.4202    0.7935    0.1652    0.3420
+    0.2174    0.3113    0.9912    0.4686    0.4953
+    0.1780    0.3267    0.6995    0.2915    0.4189
+    0.1760    0.3702    0.9491    0.2675    0.3313
+    0.1768    0.1959    0.8166    0.3922    0.5861
+    0.1605    0.3725    0.5308    0.5590    0.4328
+    0.1610    0.5239    0.7103    0.4227    0.6187
+    0.1798    0.3446    0.7606    0.2587    0.4337
+    0.1328    0.4475    0.8501    0.3423    0.3720
+    0.1879    0.3652    0.8131    0.5077    0.6458
+    0.1605    0.3391    0.6826    0.4355    0.5129
+    0.1546    0.4954    0.7188    0.3028    0.5100
+    0.1364    0.4005    0.7112    0.3646    0.4305
+    0.2162    0.2630    0.6517    0.4487    0.4677];
+
+
+HV_m =[
+    0.4115    0.0940    0.1867    0.1357    0.0493
+    0.3532    0.2054    0.0743    0.1228    0.0895
+    0.3582    0.2082    0.0261    0.1253    0.0881
+    0.3969    0.2876    0.0853    0.1013    0.0564
+    0.4289    0.2269    0.0867    0.1385    0.0295
+    0.3823    0.2238    0.0999    0.1422    0.0314
+    0.3464    0.2144    0.1438    0.1003    0.0716
+    0.3393    0.1865    0.0796    0.1143    0.0500
+    0.3968    0.2033    0.0679    0.0903    0.0784
+    0.4272    0.2170    0.1776    0.0918    0.1071
+    0.3839    0.2095    0.0652    0.1462    0.0242
+    0.3761    0.2094    0.1988    0.1226    0.0506
+    0.4053    0.2481    0.1576    0.1651    0.0465
+    0.4181    0.2961    0.1237    0.0736    0.0723
+    0.4148    0.2312    0.0812    0.1135    0.0924
+    0.4299    0.1870    0.0608    0.1079    0.0638
+    0.3873    0.2058    0.1146    0.1133    0.0607
+    0.3616    0.2076    0.0870    0.1030    0.0537
+    0.4105    0.2368    0.1915    0.1552    0.0490
+    0.3794    0.2083    0.0890    0.1012    0.0908];
+
+Fddd=min(IGD_m);     %IGD最小值
+Fddd1=mean(IGD_m);   %IGD平均值
+Feee=max(HV_m);      %HV最大值
+Feee1=mean(HV_m);    %HV平均值
+
+zhibiao111=[Fddd;Fddd1;Feee;Feee1];
+
+HV_3=HV_m;
+
+[~,a]=min(min(IGD_m));
+[~,a1]=min(mean(IGD_m));
+
+[~,c]=max(max(HV_m));
+[~,c1]=max(mean(HV_m));
+
+IGD_m   
+HV_m
+%% 处理IGD
+means_igd = mean(IGD_m )
+mins_igd = min(IGD_m )
+
+
+%% 处理HV
+means_hv = mean(HV_m)
+max_hv = max(HV_m)
+
+
+[a,a1,c,c1]    %排名
+
+[~,ww1]=sort(min(IGD_m));
+[~,ww2]=sort(mean(IGD_m));
+[~,ww3]=sort(max(HV_m));
+[~,ww4]=sort(mean(HV_m));
+
+format long   %kstest2
+[h1,p1,k]=ranksum(HV_m(:,1),HV_m(:,2),0.05);
+[h2,p2,k]=ranksum(HV_m(:,1),HV_m(:,3),0.05);
+[h3,p3,k]=ranksum(HV_m(:,1),HV_m(:,4),0.05);
+[h4,p4,k]=ranksum(HV_m(:,1),HV_m(:,5),0.05);
+w9=[p1,p2,p3,p4];
+m9=[h1,h2,h3,h4];
+kHV=double([m9])
+
+[h1,p1,k]=ranksum(IGD_m(:,1),IGD_m(:,2),0.05);
+[h2,p2,k]=ranksum(IGD_m(:,1),IGD_m(:,3),0.05);
+[h3,p3,k]=ranksum(IGD_m(:,1),IGD_m(:,4),0.05);
+[h4,p4,k]=ranksum(IGD_m(:,1),IGD_m(:,5),0.05);
+w9=[p1,p2,p3,p4];
+z9=[h1,h2,h3,h4];
+kIGD=double([z9])
+
+zhibiao_last1(:,1)=IGD_m(:,1);
+zhibiao_last1(:,3)=IGD_m(:,2);
+zhibiao_last1(:,5)=IGD_m(:,3);
+zhibiao_last1(:,7)=IGD_m(:,4);
+zhibiao_last1(:,9)=IGD_m(:,5);
+
+zhibiao_last1(:,2)=HV_m(:,1);
+zhibiao_last1(:,4)=HV_m(:,2);
+zhibiao_last1(:,6)=HV_m(:,3);
+zhibiao_last1(:,8)=HV_m(:,4);
+zhibiao_last1(:,10)=HV_m(:,5);
+
+figure 
+zhibiao=zhibiao_last1;
+IGD=zeros(20,5);
+IGD(:,1)=zhibiao(:,1);
+IGD(:,2)=zhibiao(:,3);
+IGD(:,3)=zhibiao(:,5);
+IGD(:,4)=zhibiao(:,7);
+IGD(:,5)=zhibiao(:,9);
+
+HV=zeros(20,5);
+HV(:,1)=zhibiao(:,2);
+HV(:,2)=zhibiao(:,4);
+HV(:,3)=zhibiao(:,6);
+HV(:,4)=zhibiao(:,8);
+HV(:,5)=zhibiao(:,10);
+
+subplot(1,2,1)
+h=boxplot(IGD);
+g = gca;
+line=g.Children.Children;
+line(1).Color ='b';
+line(2).Color ='b';
+line(3).Color ='b';
+line(4).Color ='b'; %最下面的线
+line(5).Color ='b';
+line(6).Color ='r';
+line(7).Color ='r';
+line(8).Color ='r';
+line(9).Color ='r';
+line(10).Color ='r';
+line(11).Color ='b'; %最下面的线
+line(12).Color ='b';
+line(13).Color ='b';
+line(14).Color ='b';
+line(15).Color ='b';
+line(16).Color ='k';
+line(17).Color ='k';
+line(18).Color ='k'; %最下面的线
+line(19).Color ='k';
+line(20).Color ='k';
+line(21).Color ='k';
+set(h,'Linewidth',1.5');
+set(gca,'XTickLabel',{'QDS-KOA','KOA','NSGAII','VNS-NSGAII','GSA'})
+ylabel('IGD')
+
+subplot(1,2,2)
+n=boxplot(HV);
+g2 = gca;
+line1=g2.Children.Children;
+line(1).Color ='b';
+line(2).Color ='b';
+line(3).Color ='b';
+line(4).Color ='b'; %最下面的线
+line(5).Color ='b';
+line(6).Color ='r';
+line(7).Color ='r';
+line(8).Color ='r';
+line(9).Color ='r';
+line(10).Color ='r';
+line(11).Color ='b'; %最下面的线
+line(12).Color ='b';
+line(13).Color ='b';
+line(14).Color ='b';
+line(15).Color ='b';
+line(16).Color ='k';
+line(17).Color ='k';
+line(18).Color ='k'; %最下面的线
+line(19).Color ='k';
+line(20).Color ='k';
+line(21).Color ='k';
+set(n,'Linewidth',1.5');
+set(gca,'XTickLabel',{'QDS-KOA','KOA','NSGAII','VNS-NSGAII','GSA'})
+% set(gca,'YTickLabel','S');
+ylabel('HV')
+
+
